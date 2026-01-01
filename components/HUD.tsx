@@ -4,6 +4,7 @@ import { useGame } from './GameContext';
 import { XP_PER_LEVEL } from '../constants';
 import { motion } from 'framer-motion';
 import { Terminal, Activity, Cpu, Clock, Instagram, Sun, Moon, Link as LinkIcon, ShieldAlert } from 'lucide-react';
+import '../types'; // Ensure global augmentations are loaded
 
 const HUD: React.FC = () => {
   const { state, theme, toggleTheme } = useGame();
@@ -16,7 +17,9 @@ const HUD: React.FC = () => {
 
   useEffect(() => {
     const checkKey = async () => {
-      if (window.aistudio?.hasSelectedApiKey) {
+      // Use optional chaining and type assertion to bypass strict compiler checks if needed, 
+      // but the global augmentation in types.ts should handle it.
+      if (typeof window !== 'undefined' && window.aistudio?.hasSelectedApiKey) {
         const selected = await window.aistudio.hasSelectedApiKey();
         setHasKey(selected);
       }
@@ -35,7 +38,7 @@ const HUD: React.FC = () => {
   }, []);
 
   const handleAuthorize = async () => {
-    if (window.aistudio?.openSelectKey) {
+    if (typeof window !== 'undefined' && window.aistudio?.openSelectKey) {
       await window.aistudio.openSelectKey();
       setHasKey(true); // Assume success per protocol to avoid race condition
     }

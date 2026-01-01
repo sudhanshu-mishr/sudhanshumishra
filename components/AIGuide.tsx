@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, Command, Terminal, ShieldAlert, ExternalLink } from 'lucide-react';
 import { chatWithNexus } from '../services/geminiService';
 import { useGame } from './GameContext';
+import '../types'; // Ensure global augmentations are loaded
 
 const AIGuide: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const AIGuide: React.FC = () => {
 
   useEffect(() => {
     const checkKey = async () => {
-      if (window.aistudio?.hasSelectedApiKey) {
+      if (typeof window !== 'undefined' && window.aistudio?.hasSelectedApiKey) {
         const selected = await window.aistudio.hasSelectedApiKey();
         setHasKey(selected);
       }
@@ -31,7 +32,7 @@ const AIGuide: React.FC = () => {
   }, [messages, isTyping]);
 
   const handleAuthorize = async () => {
-    if (window.aistudio?.openSelectKey) {
+    if (typeof window !== 'undefined' && window.aistudio?.openSelectKey) {
       await window.aistudio.openSelectKey();
       setHasKey(true);
     }

@@ -1,13 +1,15 @@
 
 import { GoogleGenAI } from "@google/genai";
+import '../types'; // Fix process.env typing issues
 
 /**
  * Sends a message history to the Gemini model and returns the response text.
  * Instantiates the client right before the call to ensure the latest process.env.API_KEY is used.
  */
 export const chatWithNexus = async (history: { role: 'user' | 'model'; parts: { text: string }[] }[]) => {
-  // Always create a new instance to handle dynamic key injection from window.aistudio
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Use a fallback for process.env during build if needed, though types.ts should cover it.
+  const apiKey = (process.env as any).API_KEY;
+  const ai = new GoogleGenAI({ apiKey });
   
   try {
     const response = await ai.models.generateContent({
