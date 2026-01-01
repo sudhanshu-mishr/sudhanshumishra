@@ -35,3 +35,17 @@ export interface Message {
   role: 'user' | 'model';
   text: string;
 }
+
+// Global augmentation for the Gemini API Studio integration
+declare global {
+  // Define AIStudio interface to match the global type expected by the environment
+  interface AIStudio {
+    hasSelectedApiKey: () => Promise<boolean>;
+    openSelectKey: () => Promise<void>;
+  }
+
+  interface Window {
+    // Fixed: Added 'readonly' and used 'AIStudio' type to satisfy "identical modifiers" and "same type" requirements.
+    readonly aistudio: AIStudio;
+  }
+}
