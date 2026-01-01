@@ -1,6 +1,6 @@
 
 import { GoogleGenAI } from "@google/genai";
-import '../types'; // Fix process.env typing issues
+import '../types';
 
 /**
  * Sends a message history to the Gemini model and returns the response text.

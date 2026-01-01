@@ -1,5 +1,4 @@
 
-
 export interface Project {
   id: string;
   title: string;
@@ -36,31 +35,3 @@ export interface Message {
   role: 'user' | 'model';
   text: string;
 }
-
-// Global augmentation for the Gemini API Studio integration
-declare global {
-  interface AIStudio {
-    hasSelectedApiKey: () => Promise<boolean>;
-    openSelectKey: () => Promise<void>;
-  }
-
-  interface Window {
-    // Removed readonly to fix error: All declarations of 'aistudio' must have identical modifiers.
-    aistudio: AIStudio;
-  }
-
-  // Fixing TS2580: Cannot find name 'process'
-  namespace NodeJS {
-    interface ProcessEnv {
-      API_KEY: string;
-    }
-  }
-
-  // Changed from const to var to fix error: Cannot redeclare block-scoped variable 'process'.
-  // Using var inside declare global correctly augments the global scope.
-  var process: {
-    env: NodeJS.ProcessEnv;
-  };
-}
-
-export {};
