@@ -1,0 +1,8 @@
+{
+  "name": "Nexus Portfolio: A Gamified Dev Experience",
+  "description": "A high-octane, futuristic personal portfolio with a built-in XP system, achievements, and an AI guide powered by Gemini.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
