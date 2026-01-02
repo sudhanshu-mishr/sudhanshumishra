@@ -1,24 +1,19 @@
 
 import React, { useState, useEffect } from 'react';
 import { useGame } from './GameContext';
-import { XP_PER_LEVEL } from '../constants';
 import { motion } from 'framer-motion';
-import { Terminal, Activity, Cpu, Clock, Instagram, Sun, Moon, Link as LinkIcon, ShieldAlert } from 'lucide-react';
-import '../types'; // Ensure global augmentations are loaded
+import { Cpu, Clock, Sun, Moon } from 'lucide-react';
+import { AnimatedLayerButton } from './ui/button';
+import '../types'; 
 
 const HUD: React.FC = () => {
-  const { state, theme, toggleTheme } = useGame();
+  const { theme, toggleTheme } = useGame();
   const [time, setTime] = useState(new Date());
   const [cpuLoad, setCpuLoad] = useState(42);
   const [hasKey, setHasKey] = useState<boolean>(false);
 
-  const xpInCurrentLevel = state.xp % XP_PER_LEVEL;
-  const progressPercent = (xpInCurrentLevel / XP_PER_LEVEL) * 100;
-
   useEffect(() => {
     const checkKey = async () => {
-      // Use optional chaining and type assertion to bypass strict compiler checks if needed, 
-      // but the global augmentation in types.ts should handle it.
       if (typeof window !== 'undefined' && window.aistudio?.hasSelectedApiKey) {
         const selected = await window.aistudio.hasSelectedApiKey();
         setHasKey(selected);
@@ -40,7 +35,7 @@ const HUD: React.FC = () => {
   const handleAuthorize = async () => {
     if (typeof window !== 'undefined' && window.aistudio?.openSelectKey) {
       await window.aistudio.openSelectKey();
-      setHasKey(true); // Assume success per protocol to avoid race condition
+      setHasKey(true); 
     }
   };
 
@@ -98,34 +93,14 @@ const HUD: React.FC = () => {
               <span className="flex items-center gap-1"><Cpu size={10} /> {cpuLoad}% CORE_LOAD</span>
             </div>
           </div>
-
-          <div className="flex flex-col items-end gap-1.5">
-            <div className="flex items-center gap-3">
-              <span className="text-[9px] font-syncopate text-[var(--text)]/30 tracking-[0.2em] uppercase">Core_Sync</span>
-              <span className="text-[10px] font-bold text-[var(--text)] tracking-widest">LVL_{state.level.toString().padStart(2, '0')}</span>
-            </div>
-            <div className="w-48 h-[2px] bg-[var(--text)]/5 relative">
-              <motion.div 
-                className="absolute top-0 left-0 h-full bg-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.6)]"
-                initial={{ width: 0 }}
-                animate={{ width: `${progressPercent}%` }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </div>
-          </div>
           
           {/* Action Button: INQUIRE */}
-          <motion.a 
-            href="https://www.instagram.com/sudhanshu_mishra107/"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2.5 bg-[var(--text)] text-[var(--bg)] px-6 py-2 rounded-sm text-[10px] font-syncopate font-bold tracking-[0.2em] hover:bg-blue-600 hover:text-white transition-all cursor-pointer shadow-[0_0_20px_rgba(255,255,255,0.1)] group"
+          <AnimatedLayerButton 
+            className="pointer-events-auto w-[160px] h-[44px]"
+            onClick={() => window.open('https://www.instagram.com/sudhanshu_mishra107/', '_blank')}
           >
-             <Instagram size={12} className="group-hover:rotate-12 transition-transform" />
-             <span>INQUIRE</span>
-          </motion.a>
+            INQUIRE
+          </AnimatedLayerButton>
         </div>
 
       </div>

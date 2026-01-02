@@ -2,6 +2,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+// For build-time process.env access in the config itself
+declare const process: any;
+
 export default defineConfig({
   plugins: [react()],
   define: {

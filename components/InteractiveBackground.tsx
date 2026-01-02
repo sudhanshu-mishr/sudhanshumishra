@@ -64,7 +64,7 @@ const InteractiveBackground: React.FC = () => {
         const dy = my - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < mouseRadius) {
+        if (distance > 0 && distance < mouseRadius) {
           const force = (mouseRadius - distance) / mouseRadius;
           const directionX = dx / distance;
           const directionY = dy / distance;
@@ -149,9 +149,10 @@ const InteractiveBackground: React.FC = () => {
     };
 
     const animate = (time: number) => {
+      if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const mx = mouseX.get();
-      const my = mouseY.get();
+      const mx = mouseX.get() || 0;
+      const my = mouseY.get() || 0;
 
       drawGrid(ctx, canvas.width, canvas.height, mx, my, time, theme);
 

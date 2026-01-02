@@ -1,15 +1,9 @@
 
 import React, { useRef } from 'react';
-import { Canvas, useFrame, useThree, ThreeElements } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Float, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 import { useGame } from './GameContext';
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements extends ThreeElements {}
-  }
-}
 
 const Robot = () => {
   const { theme } = useGame();
@@ -20,14 +14,16 @@ const Robot = () => {
   const leftBlade = useRef<THREE.Mesh>(null);
   const rightBlade = useRef<THREE.Mesh>(null);
   
-  const { mouse, viewport } = useThree();
-
   const mouseVelocity = useRef(0);
   const prevMouse = useRef(new THREE.Vector2(0, 0));
   const smoothProximity = useRef(0);
 
   useFrame((state) => {
     if (!group.current || !headGroup.current || !visor.current || !core.current || !leftBlade.current || !rightBlade.current) return;
+    
+    // Safety check for mouse and viewport in the current state
+    const { mouse, viewport } = state;
+    if (!mouse || !viewport) return;
 
     const time = state.clock.elapsedTime;
 
@@ -42,6 +38,7 @@ const Robot = () => {
 
     const targetX = (mouse.y * viewport.height) / 30;
     const targetY = (mouse.x * viewport.width) / 30;
+    
     group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, -targetX, 0.05);
     group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetY, 0.05);
 
@@ -56,7 +53,9 @@ const Robot = () => {
     const movementGlow = mouseVelocity.current * 0.4;
     
     const finalVisorIntensity = baseVisorIntensity + pulse + proximityGlow + movementGlow;
-    (visor.current.material as THREE.MeshStandardMaterial).emissiveIntensity = finalVisorIntensity;
+    if (visor.current.material instanceof THREE.MeshStandardMaterial) {
+      visor.current.material.emissiveIntensity = finalVisorIntensity;
+    }
 
     core.current.scale.setScalar(1 + Math.sin(time * 10) * 0.02 + (smoothProximity.current * 0.05));
 

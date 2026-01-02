@@ -1,7 +1,7 @@
 
 import React, { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDownRight, Zap, Loader2, Target, Crosshair } from 'lucide-react';
+import { ArrowDownRight, Zap, Loader2, Crosshair } from 'lucide-react';
 import { useGame } from '../components/GameContext';
 import RobotScene from '../components/RobotScene';
 
@@ -34,10 +34,10 @@ const Hero: React.FC = () => {
               <div className={`flex-1 h-[1px] ${theme === 'dark' ? 'bg-white/10' : 'bg-black/10'}`}></div>
             </div>
             
-            <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-bold font-syncopate mb-12 leading-[0.85] tracking-[-0.05em] text-[var(--text)]">
-              SILICON <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: theme === 'dark' ? '1px rgba(255,255,255,0.15)' : '1px rgba(0,0,0,0.1)' }}>DREAMS</span> <br />
-              & CODE<span className="text-blue-600">.</span>
+            <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-bold font-syncopate mb-12 leading-[0.95] tracking-[-0.05em] text-[var(--text)] uppercase">
+              Silicon <br />
+              <span className="text-transparent" style={{ WebkitTextStroke: theme === 'dark' ? '1px rgba(255,255,255,0.15)' : '1px rgba(0,0,0,0.1)' }}>Digital</span> <br />
+              Synthesis<span className="text-blue-600">.</span>
             </h1>
 
             <div className="flex flex-col md:flex-row gap-12 md:items-end">
@@ -52,10 +52,10 @@ const Hero: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={handleScroll}
-                  className={`group relative px-10 py-5 ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'} font-syncopate font-bold text-[10px] tracking-[0.3em] overflow-hidden transition-all duration-500`}
+                  className={`group relative px-10 py-5 ${theme === 'dark' ? 'bg-white text-black' : 'bg-black text-white'} font-syncopate font-bold text-[10px] tracking-[0.3em] overflow-hidden transition-all duration-500 uppercase`}
                 >
                   <div className="relative z-10 flex items-center gap-3">
-                    INITIATE SEQUENCE
+                    EXPLORE_SEQUENCE
                     <ArrowDownRight size={16} className="group-hover:translate-x-1 group-hover:translate-y-1 transition-transform" />
                   </div>
                   <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
@@ -82,12 +82,6 @@ const Hero: React.FC = () => {
                   <div className="flex items-center gap-2 text-[9px] font-syncopate text-blue-500/80">
                      <Crosshair size={10} /> OBJ_TRACK_ACTIVE
                   </div>
-                  <div className={`text-[8px] font-syncopate ${theme === 'dark' ? 'text-white/30' : 'text-black/30'}`}>REF: NEXUS_MK_IV</div>
-               </div>
-               
-               <div className="absolute bottom-8 right-8 text-right">
-                  <div className={`text-[8px] font-syncopate ${theme === 'dark' ? 'text-white/30' : 'text-black/30'} uppercase mb-1`}>Optical Zoom</div>
-                  <div className={`text-xs font-bold ${theme === 'dark' ? 'text-white' : 'text-black'} tracking-widest`}>4.2X</div>
                </div>
             </div>
 

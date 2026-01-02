@@ -88,7 +88,7 @@ export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       // Check for Explorer achievement
-      const totalRequired = 5; // home, about, skills, projects, contact
+      const totalRequired = 6; // home, about, skills, projects, testimonials, contact
       let updatedAchievements = prev.achievements;
       if (newDiscovered.length >= totalRequired) {
         const explorerIdx = updatedAchievements.findIndex(a => a.id === 'explorer');

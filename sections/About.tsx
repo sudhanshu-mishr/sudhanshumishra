@@ -2,8 +2,9 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Cpu, Code, Globe, Zap } from 'lucide-react';
+import { Cpu, Globe, Zap, Code } from 'lucide-react';
 import { useGame } from '../components/GameContext';
+import { Component as LogicGateTester } from '../components/ui/asmr-background';
 
 const About: React.FC = () => {
   const { markSectionVisited, theme } = useGame();
@@ -31,17 +32,22 @@ const About: React.FC = () => {
               BEYOND <br />
               <span className="opacity-20">TRANSISTORS</span>
             </h2>
-            <div className={`space-y-8 text-[var(--sub-text)] text-lg font-light leading-relaxed`}>
+            <div className={`space-y-8 text-[var(--sub-text)] text-lg font-light leading-relaxed mb-12`}>
               <p>
                 Based in Vadodara, I am a first-year B.Tech ECE student specializing in VLSI design. I view technology not just as code, but as a bridge between physical hardware and digital intelligence.
               </p>
               <p>
                 Whether it's developing AI-powered prototypes like the smart pen or building high-performance SaaS tools, my focus remains on engineering excellence and entrepreneurial growth.
               </p>
-              <p>
-                As a freelancer on Fiverr and Upwork, I actively translate complex ideas into functional web and mobile applications for global clients, ensuring every logic gate and line of code is optimized for performance.
-              </p>
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.4 }}
+            >
+              <LogicGateTester />
+            </motion.div>
           </div>
 
           <div className={`lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)]`}>
@@ -57,7 +63,6 @@ const About: React.FC = () => {
                  <div className="text-[10px] font-syncopate text-[var(--sub-text)] opacity-60 mb-3 tracking-[0.3em] uppercase">{stat.label}</div>
                  <div className={`text-2xl font-medium text-[var(--text)] group-hover:text-blue-600 transition-colors`}>{stat.value}</div>
                  
-                 {/* Precision accent */}
                  <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-[var(--border)] group-hover:border-blue-500/30 transition-colors"></div>
               </motion.div>
             ))}

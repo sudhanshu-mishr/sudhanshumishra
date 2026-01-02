@@ -7,7 +7,7 @@ export const PROJECTS: Project[] = [
     title: 'Synclane',
     description: 'A high-performance data orchestration platform designed for real-time synchronization across distributed engineering nodes.',
     tags: ['Real-time', 'Socket.io', 'Node.js'],
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop', // High-tech hardware/chip
     link: 'https://synclane-3.onrender.com',
     xpReward: 200,
   },
@@ -16,16 +16,16 @@ export const PROJECTS: Project[] = [
     title: 'Xynova',
     description: 'An AI-native synthesis environment for generative logic design and automated workflow acceleration.',
     tags: ['AI', 'React', 'Generative'],
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=1200&auto=format&fit=crop', // Logic circuit aesthetic
     link: 'https://xynova-3.onrender.com',
     xpReward: 250,
   },
   {
     id: 'p3',
-    title: 'MindNes',
+    title: 'Aura Smart Pen',
     description: 'A cognitive productivity tool focused on engineering deep-work cycles and complex mental model mapping.',
-    tags: ['Productivity', 'UX', 'Framer'],
-    image: 'https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=800&auto=format&fit=crop',
+    tags: ['Embedded', 'IoT', 'VLSI'],
+    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1200&auto=format&fit=crop', // Abstract digital node
     link: 'https://mindnes-2.onrender.com',
     xpReward: 150,
   },

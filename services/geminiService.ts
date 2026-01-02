@@ -1,14 +1,14 @@
 
 import { GoogleGenAI } from "@google/genai";
-import '../types';
+import '../types'; // Fix process.env typing issues
 
 /**
  * Sends a message history to the Gemini model and returns the response text.
  * Instantiates the client right before the call to ensure the latest process.env.API_KEY is used.
  */
 export const chatWithNexus = async (history: { role: 'user' | 'model'; parts: { text: string }[] }[]) => {
-  // Use a fallback for process.env during build if needed, though types.ts should cover it.
-  const apiKey = (process.env as any).API_KEY;
+  // Use the API_KEY directly from process.env, ensuring it uses the latest value
+  const apiKey = process.env.API_KEY;
   const ai = new GoogleGenAI({ apiKey });
   
   try {
@@ -28,6 +28,7 @@ export const chatWithNexus = async (history: { role: 'user' | 'model'; parts: { 
       }
     });
 
+    // Accessing the .text property directly as per Gemini API guidelines
     return response.text || "Synchronicity error. Re-establishing link...";
   } catch (error: any) {
     console.error("Gemini Error:", error);
